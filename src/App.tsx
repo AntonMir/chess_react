@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import './App.css'
+import BoardComponent from './components/BoardComponent';
+import { Board } from './models/Board';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [board, setBoard] = useState(new Board())
+
+    // при перересовке игра начнеся по новой
+    useEffect(() => {
+        restart()
+    }, [])   
+
+
+    /**
+     * Инициализация новой игры
+     * Рестарт формирования доски
+     */
+    function restart() {
+        const newBoard = new Board()
+        newBoard.initCells()
+        setBoard(newBoard)
+    }
+
+
+    return (
+        <div className='app'>
+            <BoardComponent/>
+        </div>
+    );
 }
 
 export default App;
