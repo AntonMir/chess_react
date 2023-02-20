@@ -1,13 +1,14 @@
 import React from 'react'
+import { Cell } from '../models/Cell'
 
-type Props = {}
+interface ICell {
+    cell: Cell
+}
 
-const CellComponent = (props: Props) => {
+const CellComponent: React.FC<ICell> = ({cell}) => {
     return (
-        <div
-            className='cell'
-        >
-
+        <div className={`cell ${cell.color}`} >
+            {cell.figure?.logo && <img className='figure' src={cell.figure.logo} alt=''/>}
         </div>
     )
 }

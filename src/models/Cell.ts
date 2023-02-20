@@ -2,6 +2,9 @@ import { Board } from "./Board";
 import { Colors } from "./Colors";
 import { Figure } from "./figures/Figure";
 
+/**
+ * Класс - конструктор для ячеек
+ */
 export class Cell {
     readonly x: number; // координата Х
     readonly y: number; // координата У

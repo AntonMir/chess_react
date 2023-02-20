@@ -20,13 +20,14 @@ function App() {
     function restart() {
         const newBoard = new Board()
         newBoard.initCells()
+        newBoard.addFigure()
         setBoard(newBoard)
     }
 
 
     return (
         <div className='app'>
-            <BoardComponent/>
+            <BoardComponent board={board} setBoard={setBoard}/>
         </div>
     );
 }
