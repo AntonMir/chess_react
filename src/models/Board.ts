@@ -21,12 +21,33 @@ export class Board {
             const row: Cell[] = []
             for (let j = 0; j < 8; j++) {
                 if((i + j) % 2 !== 0) {
-                    row.push(new Cell(this, i, j, Colors.BLACK, null)) // черные ячейки
+                    row.push(new Cell(this, j, i, Colors.BLACK, null)) // черные ячейки
                 } else {
-                    row.push(new Cell(this, i, j, Colors.WHITE, null)) // белые ячейки
+                    row.push(new Cell(this, j, i, Colors.WHITE, null)) // белые ячейки
                 }
             }
             this.cells.push(row);
+        }
+    }
+
+    public getCopyBoard() : Board {
+        const newBoard = new Board()
+        newBoard.cells = this.cells
+        return newBoard
+    }
+
+    /**
+     * Перебираем все поле
+     * Если выбранная фигура может пойти на ячейку, ставим флаг ячейки available в значение true
+     * @param selectedCell выбранная ячейка
+     */
+    public highlightCells(selectedCell: Cell | null) {
+        for(let i = 0; i < this.cells.length; i++) {
+            const row = this.cells[i]
+            for( let j = 0; j < row.length; j++) {
+                const target = row[j]
+                target.available = !!selectedCell?.figure?.canMove(target)
+            }
         }
     }
 
